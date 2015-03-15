@@ -1,4 +1,4 @@
-SublimeLinter-contrib-JoLint
+SublimeLinter-jolint
 ================================
 
 This linter plugin for SublimeLinter provides an interface to jolint. It will be used with files that have the “__jolie__” syntax.

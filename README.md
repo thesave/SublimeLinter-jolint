@@ -17,7 +17,7 @@ You can install the SublimeLinter plugin by copying/cloning it in your SublimeTe
 You can access the packages directory from the main menu *Preferences* -> *Browse Packages*.
 Once in the Packages folder you can clone/checkout the repository with 
 
-    svn co https://github.com/thesave/jolint/trunk/SublimeLinter-jolint
+    git clone https://github.com/thesave/SublimeLinter-jolint
 
 After that the plugin shall be installed correctly.
 

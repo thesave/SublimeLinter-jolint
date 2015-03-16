@@ -19,7 +19,7 @@ Using Package Control is strongly recommended.
 
 Make sure you installed Package Control and proceed with the following:
 
-- bring up the Command Palette (Default <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> or <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>P<kbd>);
+- bring up the Command Palette (Default <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> or <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>);
 - type install;
 - among the commands you should see Package Control: Install Package. Select the command;
 - Package Control will fetch the list of available plugins;

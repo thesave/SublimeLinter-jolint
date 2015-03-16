@@ -23,7 +23,7 @@ Make sure you installed Package Control and proceed with the following:
 - type install;
 - among the commands you should see Package Control: Install Package. Select the command;
 - Package Control will fetch the list of available plugins;
-- type jolie, among the entries you should see "SublimeLinter-jolint". Select it;
+- type "jolie", among the entries you should see "SublimeLinter-jolint". Select it;
 - Package Control will install the package.
 
 #### Manual installation via git

@@ -7,4 +7,4 @@ This linter plugin for SublimeLinter provides an interface to JoLint.
 Before this plugin will activate, you *must*
 follow the installation instructions here:
 
-https://github.com/TheSave/SublimeLinter-contrib-JoLint
+https://github.com/thesave/SublimeLinter-jolint

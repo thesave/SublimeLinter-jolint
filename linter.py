@@ -8,7 +8,7 @@
 # License: MIT
 #
 
-"""This module exports the JoLint plugin class."""
+"""This module exports the jolint plugin class."""
 
 from SublimeLinter.lint import Linter, util
 

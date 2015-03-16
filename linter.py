@@ -15,8 +15,7 @@ from SublimeLinter.lint import Linter, util
 
 class JoLint(Linter):
 
-    """Provides an interface to JoLint."""
-    # r'^Failure: \[(?P<line>\d+)\.(?P<col>\d+)\] failure: (?P<message>.+)$'
+    """Provides an interface to jolint."""
 
     syntax = "jolie"
     cmd = "jolint @"

@@ -10,13 +10,11 @@
 
 """This module exports the jolint plugin class."""
 
-
-
 from SublimeLinter.lint import Linter, util
 import os
 
 class JoLint(Linter):
-
+    
     """Provides an interface to jolint."""
     syntax = "jolie"
     cmd = "jolie --check @"
@@ -29,4 +27,5 @@ class JoLint(Linter):
     error_stream = util.STREAM_BOTH
 
     if os.environ.get( "JOLIE_HOME" ) is None:
+        # Set JOLIE_HOME according to your installation path
         env = { "JOLIE_HOME" : "/usr/lib/jolie" }

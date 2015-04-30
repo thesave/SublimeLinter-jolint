@@ -37,3 +37,8 @@ Once in the Packages folder you can clone/checkout the repository with
 After that the plugin shall be installed correctly.
 
 Just open a Jolie source file and start linting :)
+
+## To Do
+
+- [ ] add dependency to [SublimeLinter3](https://github.com/SublimeLinter/SublimeLinter3);
+- [ ] after installation add a pop-up to set environmental variable "JOLIE_HOME" for Mac/Linux (right now hard-coded in linter.py).

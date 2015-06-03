@@ -12,11 +12,40 @@
 
 from SublimeLinter.lint import Linter, util
 import sublime
-import os
+import os, platform
 import codecs
+import json
 
 class JoLint(Linter):
-    
+
+    USER_SETTINGS = "SublimeLinter-jolint.sublime-settings"
+    windows_default = "C:\jolie"
+    nix_default = "/usr/lib/jolie"
+    if( platform.system == "Windows" ):
+        default_install = windows_default
+    else:
+        default_install = nix_default
+
+    if os.environ.get( "JOLIE_HOME" ) is None:
+        path = os.path.join( sublime.packages_path(), "SublimeLinter-jolint" )
+        settings_file = os.path.join( path, USER_SETTINGS )
+        if os.path.exists( path ):
+            if os.path.isfile( settings_file ):
+                with codecs.open( settings_file, 'r', 'UTF-8') as settings_content:
+                    settings = json.loads( "".join( settings_content.readlines() ) )
+                    if settings[ "JOLIE_HOME" ]:
+                        os.environ[ "JOLIE_HOME" ] = settings[ "JOLIE_HOME" ]
+            else:
+                with codecs.open( settings_file, 'w', 'UTF-8' ) as settings_content:
+                    settings_content.writelines( json.dumps( { "JOLIE_HOME" : default_install } ) )
+                    sublime.message_dialog( "JOLIE_HOME not set and no settings file found.\n\n"
+                                            "JOLIE_HOME set to the default value:\n\n" + default_install + "\n\n" + 
+                                            "Settings file created at:\n\n" + settings_file + "\n\n"
+                                            "change the path according to your Jolie installation" 
+                                        )
+    else :
+        print("\"JOLIE_HOME\" is set to " + os.environ.get( "JOLIE_HOME" ) )
+
     """Provides an interface to jolint."""
     syntax = "jolie"
     cmd = "jolie --check @"
@@ -27,23 +56,6 @@ class JoLint(Linter):
     line_col_base = (1, 1)
     tempfile_suffix = None
     error_stream = util.STREAM_BOTH
-    USER_SETTINGS = "SublimeLinter-jolint.sublime-settings"
 
-    if True: #os.environ.get( "JOLIE_HOME" ) is None:
-        path = os.path.join( sublime.packages_path(), "SublimeLinter-jolint" )
-        settings_file = os.path.join( path, USER_SETTINGS )
-        if os.path.exists( path ):
-            if os.path.isfile( settings_file ):
-                sublime.message_dialog("USER_SETTINGS path: " + settings_file )
-                with codecs.open( settings_file, 'r', 'UTF-8') as settings:
-                    settings.readlines()
-            else:
-                sublime.message_dialog("USER_SETTINGS file does not exist, creating" )
-                with codecs.open( settings_file, 'w', 'UTF-8' ) as settings:
-                    settings_file.writelines( { "JOLIE_HOME" : "/usr/lib/jolie" } )
-
-        # Set JOLIE_HOME according to your installation path
-        env = { "JOLIE_HOME" : "/usr/lib/jolie" }
-    else :
-        sublime.message_dialog("\"JOLIE_HOME\" is set to " )
+    env = { "JOLIE_HOME" : os.environ[ "JOLIE_HOME" ] }
 

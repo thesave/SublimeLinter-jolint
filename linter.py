@@ -28,6 +28,10 @@ class JoLint(Linter):
     line_col_base = (1, 1)
     tempfile_suffix = None
     error_stream = util.STREAM_BOTH
+    defaults = {
+        "mark_style": "outline",
+        "lint_mode": "load/save"
+    }
 
     def cmd(self):
         """Return the command line to execute."""

@@ -20,6 +20,8 @@ class JoLint(Linter):
     """Provides an interface to jolint."""
     syntax = "jolie"
     executable = "jolie"
+    if( platform.system() == "Windows" ):
+        executable += ".bat"
     # cmd = "jolie --check @"
     regex = (
         r'^.+:(?P<line>\d+): error: (?P<message>.+)$'
@@ -48,7 +50,7 @@ class JoLint(Linter):
 class Utilities():
     def getJolieHome():
         USER_SETTINGS = "SublimeLinter-jolint.sublime-settings"
-        WIN_DEF_JOLIE_HOME = "C:\jolie"
+        WIN_DEF_JOLIE_HOME = "C:\\Jolie"
         NIX_DEF_JOLIE_HOME = "/usr/lib/jolie"
         if( platform.system == "Windows" ):
             DEF_JOLIE_HOME = WIN_DEF_JOLIE_HOME

@@ -10,6 +10,7 @@
 
 """This module exports the jolint plugin class."""
 
+import SublimeLinter
 from SublimeLinter.lint import Linter, util
 import sublime
 import os, platform
@@ -29,10 +30,17 @@ class JoLint(Linter):
     multiline = True
     line_col_base = (1, 1)
     tempfile_suffix = None
-    error_stream = util.STREAM_BOTH
+    error_stream = util.STREAM_STDERR
+    if getattr(SublimeLinter.lint, 'VERSION', 3) > 3:
+        from SublimeLinter.lint import const
+        ERROR = const.ERROR
+    else:
+        from SublimeLinter.lint import highlight
+        ERROR = highlight.ERROR
+    default_type = ERROR
     defaults = {
         "mark_style": "outline",
-        "lint_mode": "load/save"
+        "lint_mode": "load_save"
     }
 
     def cmd(self):
@@ -44,7 +52,7 @@ class JoLint(Linter):
             else: 
                 self.env = { "JOLIE_HOME" : JOLIE_HOME }
                 
-        command = [self.executable, '--check', '@']
+        command = [self.executable, '--check', '$file']
         return command + ['*', '-']
 
 class Utilities():

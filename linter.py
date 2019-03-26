@@ -1,17 +1,16 @@
 #
 # linter.py
-# Linter for SublimeLinter3, a code checking framework for Sublime Text 3
+# Linter for SublimeLinter4, a code checking framework for Sublime Text 3
 #
 # Written by Saverio Giallorenzo
-# Copyright (c) 2015 Saverio Giallorenzo
+# Copyright (c) 2015--2019 Saverio Giallorenzo
 #
 # License: MIT
 #
 
 """This module exports the jolint plugin class."""
 
-import SublimeLinter
-from SublimeLinter.lint import Linter, util
+from SublimeLinter.lint import Linter, ERROR
 import sublime
 import os, platform
 import json
@@ -30,14 +29,9 @@ class JoLint(Linter):
     multiline = True
     line_col_base = (1, 1)
     tempfile_suffix = None
-    error_stream = util.STREAM_STDERR
-    if getattr(SublimeLinter.lint, 'VERSION', 3) > 3:
-        from SublimeLinter.lint import const
-        ERROR = const.ERROR
-    else:
-        from SublimeLinter.lint import highlight
-        ERROR = highlight.ERROR
+    on_stderr = None
     default_type = ERROR
+    error_stream = util.STREAM_BOTH
     defaults = {
         "mark_style": "outline",
         "lint_mode": "load_save"
@@ -52,7 +46,7 @@ class JoLint(Linter):
             else: 
                 self.env = { "JOLIE_HOME" : JOLIE_HOME }
                 
-        command = [self.executable, '--check', '$file']
+        command = [self.executable, '--check', '@']
         return command + ['*', '-']
 
 class Utilities():
